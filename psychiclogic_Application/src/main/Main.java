@@ -1,10 +1,24 @@
 package main;
 
-public class Main {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+
+public class Main extends Application {
 
 	public static void main(String[] args) {
-            // TODO Auto-generated method stub
-            System.out.println("C'est un Evoli!");
+            launch(args);
 	}
-
+	
+	 @Override
+	    public void start(Stage primaryStage) throws Exception{
+	        Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+	        primaryStage.setTitle("Psychiclogic");
+	        primaryStage.getIcons().add(new Image("/main/icons/icon.png"));
+	        primaryStage.setScene(new Scene(root));
+	        primaryStage.show();
+	    }
 }
