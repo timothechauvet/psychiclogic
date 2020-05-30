@@ -1,5 +1,6 @@
 package main;
 
+
 import MySQL.MySQLConnector;
 import MySQL.Psychiclogic;
 
@@ -15,6 +16,7 @@ public class Main {
         Psychiclogic psy = new Psychiclogic();
         psy.seePatients();
     }
+    
     
     
     

@@ -1,4 +1,5 @@
 /bin/
+<<<<<<< HEAD
 /psychiclogic_Application/build/
 /psychiclogic_Application/ConnexionJM/build/
 /psychiclogic_Application/ConnexionJM/nbproject/private/
@@ -6,3 +7,6 @@
 /psychiclogic_Application - Copie/ConnexionJM/nbproject/private/
 /psychiclogic_Application - Copie/build/
 /psychiclogic_Application - Copie/nbproject/private/
+=======
+/psychiclogic_Application/build/
+>>>>>>> master
