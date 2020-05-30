@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3308
--- Généré le :  jeu. 28 mai 2020 à 14:14
+-- Généré le :  sam. 30 mai 2020 à 16:27
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -87,7 +87,16 @@ CREATE TABLE IF NOT EXISTS `patient` (
   `DNaissance` date NOT NULL,
   `moyenRencontre` tinytext NOT NULL,
   PRIMARY KEY (`PK_Patient`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `patient`
+--
+
+INSERT INTO `patient` (`PK_Patient`, `mail`, `password`, `prénom`, `2prénom`, `nom`, `adresse`, `DNaissance`, `moyenRencontre`) VALUES
+(1, 'b.b@mail.com', 'oui', 'Billy', '', 'McGregor', '1 allée de la peine', '2003-02-01', 'Une brochure'),
+(4, 'gr@gmail.com', 'mdp', 'Gregoire', 'Greg', 'Roy', 'Rue de la Fame', '2006-06-06', 'internet'),
+(6, 'Jesus', 'Christ', 'js@hotmail.fr', 'God', 'Christ', 'heaven', '0000-01-01', 'Bible');
 
 -- --------------------------------------------------------
 

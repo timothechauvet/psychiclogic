@@ -1,71 +1,38 @@
 package main;
 
 import MySQL.MySQLConnector;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import MySQL.Psychiclogic;
+
 
 public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
+        
+        //connectionTest ();
+        
+        
+        Psychiclogic psy = new Psychiclogic();
+        psy.seePatients();
+    }
+    
+    
+    
+    public static void connect () {
         MySQLConnector msqlc = new MySQLConnector();
+        msqlc.openConnection();
         
-        Connection cn = msqlc.openConnection();
-        //msqlc.executeRequest("SELECT * FROM Patient");
         
-        //essaie requete
-        try {
-            Statement st = cn.createStatement();
-            /*String request = "INSERT INTO users"
-                    + "(mail, password, prénom, 2prénom, nom, adresse, DNaissance, moyenRencontre)"
-                    + "values (a, b, c, d, e, f, 123, h)";*/
-            String request = "SELECT * FROM Patient";
-            ResultSet rs = st.executeQuery(request);
-            //rs = st.executeQuery();
-            System.out.println("displaying");
-            while (rs.next()) {
-                //rs.getString(1);
-                rs.getString("mail");
-            }
-            rs.close();
-            st.close();
-        }
-        catch (SQLException sqle) {
-           System.out.println("\nERROR:\tCould not satisfy request: \n\t");
-           System.out.println(sqle);
-        }
-        //fin essaie requete
+        msqlc.executeRequest("SELECT * FROM Patient");  
+        
+        //Create a RDV
+        msqlc.executeRequest("INSERT INTO rdv"
+            + " (SDate)"
+            + " VALUES (2003-02-01)");
+        
         
         msqlc.closeConnection();
-        
-        
-        //Connection on = connect ();
     }
-
-    
-    
-    public static Connection connect () {
-        try {           
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:8080/psychiclogic", "root","");
-            /*access port for xampp BD: 3306*/
-            /*access port for wamp BD: 8080*/
-            Statement st=cn.createStatement();
-            ResultSet rs=st.executeQuery("select * from User");
-            while(rs.next())
-            {
-                System.out.println(rs.getString("Num_com"));
-            }
-            return cn;
-        }
-        catch (SQLException sqle) {
-           System.out.println(sqle);
-        }
-        return null;
-    }
-    
     
     
     /*

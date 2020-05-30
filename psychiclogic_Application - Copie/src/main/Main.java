@@ -1,64 +1,38 @@
 package main;
 
 import MySQL.MySQLConnector;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import MySQL.Psychiclogic;
+
 
 public class Main {
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        MySQLConnector msqlc = new MySQLConnector();
-        Connection conn = msqlc.openConnection();
         
-        try {
-            Statement st=conn.createStatement();
-            ResultSet rs=st.executeQuery("select * from Patient");
-            while(rs.next())
-            {
-                System.out.println(rs.getString(1));
-            }
-        }
-        catch (SQLException sqle) {
-           System.out.println(sqle);
-        }
+        //connectionTest ();
+        
+        
+        Psychiclogic psy = new Psychiclogic();
+        psy.seePatients();
+    }
+    
+    
+    
+    public static void connect () {
+        MySQLConnector msqlc = new MySQLConnector();
+        msqlc.openConnection();
+        
+        
+        msqlc.executeRequest("SELECT * FROM Patient");  
+        
+        //Create a RDV
+        msqlc.executeRequest("INSERT INTO rdv"
+            + " (SDate)"
+            + " VALUES (2003-02-01)");
+        
         
         msqlc.closeConnection();
-        
-        
-        /*try {
-            Statement stmt = conn.createStatement();
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }*/
-        
-        //Connection on = connect ();
     }
-
-    
-    
-    public static Connection connect () {
-        try {           
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:8080/psychiclogic", "root","");
-            /*access port for xampp BD: 3306*/
-            /*access port for wamp BD: 8080*/
-            Statement st=cn.createStatement();
-            ResultSet rs=st.executeQuery("select * from User");
-            while(rs.next())
-            {
-                System.out.println(rs.getString("Num_com"));
-            }
-            return cn;
-        }
-        catch (SQLException sqle) {
-           System.out.println(sqle);
-        }
-        return null;
-    }
-    
     
     
     /*

@@ -17,15 +17,15 @@ import java.sql.Statement;
  */
 public class MySQLConnector {
     //JDBC driver name and database URL
-    private String JDBC_DRIVER;  
-    private String DB_URL;
+    protected String JDBC_DRIVER;  
+    protected String DB_URL;
     //Database credentials
-    private String USER;
-    private String PASS;
-    private Connection conn;
+    protected String USER;
+    protected String PASS;
+    protected Connection conn;
     //Interraction with database
-    private Statement stmnt;
-    private ResultSet rslt;
+    protected Statement stmnt;
+    protected ResultSet rslt;
     
     /*Classe                            Rôle
     DriverManager                       Charger et configurer le driver de la base de données.
@@ -40,14 +40,18 @@ public class MySQLConnector {
             /*for me it seems to be port 3308*/
             /*access port for xampp BD: 3306*/
             /*access port for wamp BD: 8080 or 8888 idk*/
+            
         this.USER = "root";
         this.PASS = "";
         this.conn = null;
+        
+        this.stmnt = null;
+        this.rslt = null;
     }
     
     
     
-    public Connection openConnection () {
+    public void openConnection () {
         try {
             //Register JDBC driver
             Class.forName(JDBC_DRIVER);
@@ -55,30 +59,42 @@ public class MySQLConnector {
             System.out.println("Connecting to data base\t" + DB_URL);
             this.conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("Connection established:\t" + DB_URL);
-            
-            return this.conn;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             //Handle errors for JDBC
             System.out.println("\nERROR:\tCould not connect to database: "+DB_URL);
             e.printStackTrace();
         }
-        return null;
     }
     
     
-    public void requete (String rqt) {
+    public void executeRequest (String rqt) {
         try {
-            Statement st = this.conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from Patient");
-            while(rs.next())
+            stmnt = conn.createStatement();
+            rslt = stmnt.executeQuery(rqt);
+            while(rslt.next())
             {
-                System.out.println(rs.getString(1));
-                System.out.println(rs.toString());
+                System.out.println(" -> " + rslt.getString("mail"));
             }
+            rslt.close();
+            stmnt.close();
         }
         catch (SQLException sqle) {
-           System.out.println(sqle);
+           System.out.println("\nERROR:\tCould not satisfy request: \n\t" + rqt);
+           sqle.printStackTrace();
         }
+    }
+    
+    
+    public int getNbrRows_ResultSet (ResultSet rs) {
+        int i = 0;
+        try {
+            while(rs.next()) i++;
+        }
+        catch (SQLException sqle) {
+           sqle.printStackTrace();
+        }
+        return i;
     }
     
      
@@ -86,7 +102,8 @@ public class MySQLConnector {
         try {
             if(this.conn != null)
             conn.close();
-        } catch (SQLException se) {
+        }
+        catch (SQLException se) {
             System.out.println("\nERROR:\tCould not close database: "+DB_URL);
             se.printStackTrace();
         }

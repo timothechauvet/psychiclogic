@@ -17,15 +17,15 @@ import java.sql.Statement;
  */
 public class MySQLConnector {
     //JDBC driver name and database URL
-    private String JDBC_DRIVER;  
-    private String DB_URL;
+    protected String JDBC_DRIVER;  
+    protected String DB_URL;
     //Database credentials
-    private String USER;
-    private String PASS;
-    private Connection conn;
+    protected String USER;
+    protected String PASS;
+    protected Connection conn;
     //Interraction with database
-    private Statement stmnt;
-    private ResultSet rslt;
+    protected Statement stmnt;
+    protected ResultSet rslt;
     
     /*Classe                            Rôle
     DriverManager                       Charger et configurer le driver de la base de données.
@@ -51,7 +51,7 @@ public class MySQLConnector {
     
     
     
-    public Connection openConnection () {
+    public void openConnection () {
         try {
             //Register JDBC driver
             Class.forName(JDBC_DRIVER);
@@ -59,35 +59,42 @@ public class MySQLConnector {
             System.out.println("Connecting to data base\t" + DB_URL);
             this.conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("Connection established:\t" + DB_URL);
-            
-            return this.conn;
         }
         catch (Exception e) {
             //Handle errors for JDBC
             System.out.println("\nERROR:\tCould not connect to database: "+DB_URL);
             e.printStackTrace();
         }
-        return null;
     }
     
     
     public void executeRequest (String rqt) {
         try {
-            Statement st = conn.createStatement();
-                System.out.println("a");
-           rslt = stmnt.executeQuery(rqt);
-                System.out.println("b");
+            stmnt = conn.createStatement();
+            rslt = stmnt.executeQuery(rqt);
             while(rslt.next())
             {
-                System.out.println(rslt.getString(1));
+                System.out.println(" -> " + rslt.getString("mail"));
             }
             rslt.close();
             stmnt.close();
         }
         catch (SQLException sqle) {
            System.out.println("\nERROR:\tCould not satisfy request: \n\t" + rqt);
-           System.out.println(sqle);
+           sqle.printStackTrace();
         }
+    }
+    
+    
+    public int getNbrRows_ResultSet (ResultSet rs) {
+        int i = 0;
+        try {
+            while(rs.next()) i++;
+        }
+        catch (SQLException sqle) {
+           sqle.printStackTrace();
+        }
+        return i;
     }
     
      
