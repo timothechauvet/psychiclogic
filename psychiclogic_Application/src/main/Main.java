@@ -16,6 +16,7 @@ public class Main {
         Connection cn = msqlc.openConnection();
         //msqlc.executeRequest("SELECT * FROM Patient");
         
+        //essaie requete
         try {
             Statement st = cn.createStatement();
             /*String request = "INSERT INTO users"
@@ -36,6 +37,7 @@ public class Main {
            System.out.println("\nERROR:\tCould not satisfy request: \n\t");
            System.out.println(sqle);
         }
+        //fin essaie requete
         
         msqlc.closeConnection();
         
