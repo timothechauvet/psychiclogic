@@ -37,23 +37,23 @@ public class Controller implements Initializable {
         } else
         if(mouseEvent.getSource() == btn_settings)
         {
-            new FXMLLoader(getClass().getResource("welcome/settings.fxml"));
+            LoadStages("welcome/settings.fxml");
         } else
         if(mouseEvent.getSource() == btn_update)
         {
-            new FXMLLoader(getClass().getResource("welcome/update.fxml"));
+            LoadStages("welcome/update.fxml");
         } else
         if(mouseEvent.getSource() == btn_logout)
         {
-            new FXMLLoader(getClass().getResource("welcome/signin.fxml"));
+            LoadStages("welcome/signin.fxml");
         } else
         if(mouseEvent.getSource() == btn_calendar)
         {
-            new FXMLLoader(getClass().getResource("welcome/calendar.fxml"));
+            LoadStages("welcome/calendar.fxml");
         } else
         if(mouseEvent.getSource() == btn_addpatient)
         {
-            new FXMLLoader(getClass().getResource("welcome/addpatient.fxml"));
+            LoadStages("welcome/addpatient.fxml");
         }
     }
 
