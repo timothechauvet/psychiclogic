@@ -35,8 +35,8 @@ public class MySQLConnector {
     
     
     public MySQLConnector () {
-        this.JDBC_DRIVER = "com.mysql.jdbc.Driver";
-        this.DB_URL = "jdbc:mysql://localhost:3308/psychiclogic";
+        this.JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+        this.DB_URL = "jdbc:mysql://localhost:3308/psychiclogic?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             /*for me it seems to be port 3308*/
             /*access port for xampp BD: 3306*/
             /*access port for wamp BD: 8080 or 8888 idk*/

@@ -6,8 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import MySQL.MySQLConnector;
-import MySQL.Psychiclogic;
+import MySQL.*;
 
 public class Main extends Application {
 
@@ -27,8 +26,8 @@ public class Main extends Application {
         // TODO Auto-generated method stub
         
         //connectionTest ();
-        
-        
+
+
         Psychiclogic psy = new Psychiclogic();
         psy.seePatients();
     }
