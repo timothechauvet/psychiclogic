@@ -72,16 +72,24 @@ public class MySQLConnector {
         try {
             stmnt = conn.createStatement();
             rslt = stmnt.executeQuery(rqt);
-            while(rslt.next())
-            {
-                System.out.println(" -> " + rslt.getString("mail"));
-            }
-            rslt.close();
-            stmnt.close();
         }
         catch (SQLException sqle) {
            System.out.println("\nERROR:\tCould not satisfy request: \n\t" + rqt);
            sqle.printStackTrace();
+           rslt = null;
+        }
+    }
+
+    public void displayResultSet () {
+        try {
+            while (rslt.next()) {
+                System.out.println();
+                for (int i = 1; i <= rslt.getMetaData().getColumnCount(); i++) {
+                    System.out.print(rslt.getString(i) + "\t\t ");
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
     
@@ -107,7 +115,7 @@ public class MySQLConnector {
             System.out.println("\nERROR:\tCould not close database: "+DB_URL);
             se.printStackTrace();
         }
-        System.out.println("Connection closed: \t"+ DB_URL);
+        System.out.println("\nConnection closed: \t"+ DB_URL);
     }
     
     

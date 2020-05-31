@@ -31,7 +31,9 @@ public class Main extends Application {
         psy.seeRDVs("", "");
         psy.seeRDVs("2000-01-01", "2010-01-01");
         psy.seeRDVs("2010-01-01", "");
-        
+
+        //psy.seeRDVsPatient("b.b@mail.com");
+
         psy.closeConnection();
 
 
