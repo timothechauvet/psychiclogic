@@ -30,30 +30,30 @@ public class Controller implements Initializable {
 
     @FXML
     private void handleButtonClick(javafx.event.ActionEvent mouseEvent)
-    {LoadStages("/
+    {
         if(mouseEvent.getSource() == btn_patients)
         {
             LoadStages("/main/patients.fxml");
         } else
         if(mouseEvent.getSource() == btn_settings)
         {
-            LoadStages("/main/settings.fxml"));
+            LoadStages("/main/settings.fxml");
         } else
         if(mouseEvent.getSource() == btn_update)
         {
-            LoadStages("/main/update.fxml"));
+            LoadStages("/main/update.fxml");
         } else
         if(mouseEvent.getSource() == btn_logout)
         {
-            LoadStages("/main/signin.fxml"));
+            LoadStages("/main/signin.fxml");
         } else
         if(mouseEvent.getSource() == btn_calendar)
         {
-            LoadStages("/main/calendar.fxml"));
+            LoadStages("/main/calendar.fxml");
         } else
         if(mouseEvent.getSource() == btn_addpatient)
         {
-            LoadStages("/main/addpatient.fxml"));
+            LoadStages("/main/addpatient.fxml");
         }
     }
 
