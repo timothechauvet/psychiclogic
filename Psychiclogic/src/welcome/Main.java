@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import MySQL.Psychiclogic;
@@ -19,15 +20,14 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 1143, 727));
         primaryStage.show();
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("welcome/icons/icon.png"));
     }
 
 
     public static void main(String[] args) {
-
+        //launch(args);
         Psychiclogic psy = new Psychiclogic();
-
         psy.seePatients();
-
         psy.seeRDVs("", "");
         psy.seeRDVs("2000-01-01", "2010-01-01");
         psy.seeRDVs("2010-01-01", "");
@@ -38,7 +38,7 @@ public class Main extends Application {
 
 
         // TODO Auto-generated method stub
-        //launch(args);
+
     }
 
 }

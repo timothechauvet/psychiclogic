@@ -66,6 +66,14 @@ public class MySQLConnector {
             e.printStackTrace();
         }
     }
+
+    public Connection getConnection() throws SQLException, ClassNotFoundException{
+        if(conn !=null && !conn.isClosed())
+            return conn;
+        openConnection();
+        return conn;
+
+    }
     
     
     public void executeRequest (String rqt) {

@@ -28,14 +28,14 @@
          </children></Pane>
       <TableView id="patients_table" layoutX="38.0" layoutY="264.0" prefHeight="440.0" prefWidth="1063.0" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="264.0">
         <columns>
-          <TableColumn id="id" prefWidth="48.0" text="ID" />
-          <TableColumn id="email" prefWidth="110.0" text="Email" />
-            <TableColumn id="prenom" prefWidth="104.0" text="Prénom" />
-            <TableColumn id="2eprenom" prefWidth="108.0" text="2e prénom" />
-            <TableColumn id="nom" prefWidth="106.0" text="Nom" />
-            <TableColumn id="adresse" minWidth="0.0" prefWidth="245.0" text="Adresse" />
-            <TableColumn id="naissance" minWidth="0.0" prefWidth="119.0" text="Date de naissance" />
-            <TableColumn id="rencontre" prefWidth="222.0" text="Moyen de rencontre" />
+          <TableColumn     fx:id="t_id" id="id"         prefWidth="48.0"    text="ID" />
+          <TableColumn     fx:id="t_email" id="email"      prefWidth="110.0"   text="Email" />
+            <TableColumn   fx:id="t_prenom" id="prenom"     prefWidth="104.0"   text="Prénom" />
+            <TableColumn   fx:id="t_2eprenom" id="2eprenom"   prefWidth="108.0"   text="2e prénom" />
+            <TableColumn   fx:id="t_nom" id="nom"        prefWidth="106.0"   text="Nom" />
+            <TableColumn   fx:id="t_adresse" id="adresse"    minWidth="0.0"      prefWidth="245.0" text="Adresse" />
+            <TableColumn   fx:id="t_naissance" id="naissance"  minWidth="0.0"      prefWidth="119.0" text="Date de naissance" />
+            <TableColumn   fx:id="t_rencontre" id="rencontre"  prefWidth="222.0"   text="Moyen de rencontre" />
         </columns>
       </TableView>
    </children>

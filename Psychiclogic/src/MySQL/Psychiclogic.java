@@ -5,28 +5,104 @@
  */
 package MySQL;
 
+import welcome.Patient;
+
 import java.sql.*;
+import java.util.List;
 
 /**
  *
  * @author remyc
  */
 public class Psychiclogic extends MySQLConnector {
+    //JDBC driver name and database URL
+    protected String JDBC_DRIVER;
+    protected String DB_URL;
+    //Database credentials
+    protected String USER;
+    protected String PASS;
+    protected Connection conn;
+    //Interraction with database
+    protected Statement stmnt;
+    protected ResultSet rslt;
+    private List<Patient> patients;
+
+
+
 
     public Psychiclogic () {
         super();
         this.openConnection();
     }
 
-    
+    public void setPatients()
+    {
+        String rqt = "SELECT * FROM patient";
+        try {
+            stmnt = conn.createStatement();
+            rslt = stmnt.executeQuery(rqt);
+
+            System.out.println("\n\nPK\t\t mail\t\t pswrd\t\t fname\t\t 2fname\t\t name \t\taddress \t\tBDate \t\tmeeting");
+            rslt.beforeFirst();
+            while (rslt.next()) {
+                System.out.println(rslt);
+                //patients.add(new Patient(reader.GetString(reader.GetOrdinal("Tag"))));
+            }
+            rslt.close();
+            stmnt.close();
+        }
+        catch (SQLException sqle) {
+            System.out.println("\nERROR:\tCould not satisfy request: \n\t" + rqt);
+            sqle.printStackTrace();
+        }
+    }
+
     public void seePatients () {
         String rqt = "SELECT * FROM Patient";
-        executeRequest(rqt);
-        System.out.println("\n\nPK\t\t mail\t\t pswrd\t\t fname\t\t 2fname\t\t name \t\taddress \t\tBDate \t\tmeeting");
-        displayResultSet();
+        try {
+            stmnt = conn.createStatement();
+            rslt = stmnt.executeQuery(rqt);
+
+            System.out.println("\n\nPK\t\t mail\t\t pswrd\t\t fname\t\t 2fname\t\t name \t\taddress \t\tBDate \t\tmeeting");
+            rslt.beforeFirst();     //not rs.first() because the rs.next() below will move on, missing the first element
+            while (rslt.next()) {
+                System.out.println();
+                for (int i=1; i<=rslt.getMetaData().getColumnCount(); i++) {
+                    System.out.print(rslt.getString(i)+"\t\t ");
+                }
+            }
+            rslt.close();
+            stmnt.close();
+        }
+        catch (SQLException sqle) {
+           System.out.println("\nERROR:\tCould not satisfy request: \n\t" + rqt);
+           sqle.printStackTrace();
+        }
     }
 
 
+    /*public void seeRDVs () {
+        String rqt = "SELECT * FROM RDV";
+        try {
+            stmnt = conn.createStatement();
+            rslt = stmnt.executeQuery(rqt);
+
+            System.out.println("\n\nPK\t\t SDate\t\t montant\t\t moyenPayment");
+            rslt.beforeFirst();     //not rs.first() because the rs.next() below will move on, missing the first element
+            while (rslt.next()) {
+                System.out.println();
+                for (int i=1; i<=rslt.getMetaData().getColumnCount(); i++) {
+                    System.out.print(rslt.getString(i)+"\t\t ");
+                }
+            }
+            rslt.close();
+            stmnt.close();
+        }
+        catch (SQLException sqle) {
+           System.out.println("\nERROR:\tCould not satisfy request: \n\t" + rqt);
+           sqle.printStackTrace();
+        }
+    }*/
 
     public void seeRDVs (String SDate, String EDate) {
         /*gets all rendez-vous' happening between two timestamps : YYY-MM-DD*/
@@ -41,42 +117,25 @@ public class Psychiclogic extends MySQLConnector {
         else rqt = "SELECT * FROM RDV";
 
         if (rqt != "") {
-            executeRequest(rqt);
-            System.out.println("\n\nPK\t\t SDate\t\t montant\t\t moyenPayment");
-            displayResultSet();
+            try {
+                stmnt = conn.createStatement();
+                rslt = stmnt.executeQuery(rqt);
+
+                System.out.println("\n\nPK\t\t SDate\t\t montant\t\t moyenPayment");
+                rslt.beforeFirst();     //not rs.first() because the rs.next() below will move on, missing the first element
+                while (rslt.next()) {
+                    System.out.println();
+                    for (int i = 1; i <= rslt.getMetaData().getColumnCount(); i++) {
+                        System.out.print(rslt.getString(i) + "\t\t ");
+                    }
+                }
+                rslt.close();
+                stmnt.close();
+            } catch (SQLException sqle) {
+                System.out.println("\nERROR:\tCould not satisfy request: \n\t" + rqt);
+                sqle.printStackTrace();
+            }
         }
     }
-
-
-
-    public void seeRDVsPatient (String patientMail) {
-        String rqt = "SELECT Patient.name, RDV.SDate"
-                + " FROM Participation"
-                + " JOIN Patient ON Patient.PK_Patient = Participation.FK_Patient"
-                + " WHERE Patient.mail = '" + patientMail + "'";
-        this.executeRequest(rqt);
-        System.out.println("RDVs for patient with mail:\t" + patientMail);
-        this.displayResultSet();
-    }
-
-
-    /*public void seeRDVs (String SDate, String EDate) {
-        /*gets all rendez-vous' happening between two timestamps : YYY-MM-DD
-        String rqt = "";
-        if (SDate != "" && EDate != "") {
-            rqt = "SELECT * FROM RDV WHERE SDate > '" + SDate + "' AND SDate < '" + EDate + "'";
-        } else if (SDate != "") {
-            rqt = "SELECT * FROM RDV WHERE SDate > '" + SDate + "'";
-        } else if (EDate != "") {
-            rqt = "SELECT * FROM RDV WHERE SDate < '" + EDate + "'";
-        }
-        else rqt = "SELECT * FROM RDV";
-
-        if (rqt != "") {
-            this.executeRequest(rqt);
-            System.out.println("\n\nPK\t\t SDate\t\t montant\t\t moyenPayment");
-            this.displayResultSet();
-        }
-    }*/
 
 }
