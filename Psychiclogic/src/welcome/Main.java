@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("signin.fxml"));
         primaryStage.setTitle("Psychiclogic");
         primaryStage.setScene(new Scene(root, 1143, 727));
         primaryStage.show();
@@ -25,7 +25,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        //launch(args);
+        launch(args);
         Psychiclogic psy = new Psychiclogic();
         psy.seePatients();
         psy.seeRDVs("", "");
